@@ -1,0 +1,43 @@
+/*
+Author: Zakrewski
+Date: 28.10.2021
+*/
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class TextAnalyser {
+    public static void analyse(String text) {
+        int vowelsCounter = 0; // гласные
+        int consonantsCounter = 0; // согласные
+        int punctuationMarksCounter = 0;
+        int wordsCounter = 1;
+
+        List<Character> punctuationMarks = new ArrayList<>(Arrays.asList('.', ',', ';', ':', '-', '\'', '!',
+                '?', '—'));
+        List<Character> vowels = new ArrayList<>(Arrays.asList('а', 'о', 'е', 'ю', 'я', 'ё', 'у', 'э', 'ы', 'и',
+                'А', 'О', 'Е', 'Ю', 'Я', 'Ё', 'У', 'Э', 'Ы', 'И', 'a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I',
+                'O', 'U', 'Y'));
+
+        text = text.trim();
+        for(int i = 0; i < text.length(); i++) {
+            char symbol = text.charAt(i);
+            if(symbol == ' ') {
+                wordsCounter++;
+            } else if(punctuationMarks.contains(symbol)) {
+                punctuationMarksCounter++;
+            } else if(vowels.contains(symbol)) {
+                vowelsCounter++;
+            } else if((symbol >= 1040 && symbol <= 1103) || (symbol >= 65 && symbol <= 90)
+                    || (symbol >= 97 && symbol <= 122)) {
+                consonantsCounter++;
+            }
+        }
+
+        System.out.printf("\nVowels characters amount: %d\n", vowelsCounter);
+        System.out.printf("Consonants characters amount: %d\n", consonantsCounter);
+        System.out.printf("Punctuation marks amount: %d\n", punctuationMarksCounter);
+        System.out.printf("Words amount: %d\n", wordsCounter);
+    }
+}
